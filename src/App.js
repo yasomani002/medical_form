@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Grid, Typography } from "@mui/material";
+import { makeStyles } from '@mui/styles';
+import { Route, Routes } from "react-router-dom";
+import Form from "./pages/Form";
+import Summery from "./pages/Summery";
+
+const useStyles = makeStyles({
+  root: {
+    height: '100vh',
+    width: '92vw',
+  }
+})
 
 function App() {
+
+  const classes = useStyles()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Grid container justifyContent={'center'} alignContent={'center'} className={classes.root}>
+        <Routes>
+          <Route exact path="/" element={<Form />} />
+          <Route exact path="/summery" element={<Summery />} />
+          
+        </Routes>
+      </Grid>
+    </>
   );
 }
 
