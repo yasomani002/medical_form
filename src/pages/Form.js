@@ -58,18 +58,21 @@ const useStyles = makeStyles({
             width: '90%',
             height: '150px'
         }
-
+    },
+    footer:{
+        margin: '20px 0'
     }
 })
 export const ContexData = createContext()
 
 function Form({setShow}) {
     const classes = useStyles()
+
     const [diagnosed, setDiagnosed] = useState({
         name: "",
         status: ""
     })
-    const handleRadio = (e) => {
+    const handleDiagnose = (e) => {
         e.preventDefault()
         const target = e.target
         const diagnosedName = target.name
@@ -164,21 +167,11 @@ function Form({setShow}) {
         e.preventDefault()
     }
 
-    const dataArray = [diagnosed, physical, mental, experiance, scale]
-
-    const obj = [
-        { name: 'yash' , age: '23'},
-        { name: 'yash' , age: '23'}
-
-    ]
-
-
-    
-    const [ formavalue , setFormvalue] = useState(obj)
+    const dataArray = [diagnosed, physical, mental, experiance,facewhile, scale]
 
     return (
         <>
-        <ContexData.Provider value={obj} >
+        <ContexData.Provider value={dataArray} >
             <Grid className={classes.root}>
 
                 {/* header01 */}
@@ -233,7 +226,7 @@ function Form({setShow}) {
                                     type.map((item) => {
                                         return (
                                             <>
-                                                <Radio type="radio" name="diagnoses" value={item} onChange={(e) => handleRadio(e)} />
+                                                <Radio type="radio" name="diagnoses" value={item} onChange={(e) => handleDiagnose(e)} />
                                                 <label>{item}</label>
                                             </>
                                         )
@@ -341,20 +334,15 @@ function Form({setShow}) {
                 </Grid>
 
                 {/* button  */}
-                <Grid>
+                <Grid container justifyContent={'space-between'} className={classes.footer}>
+                    <Grid></Grid>
                     <Link to={'/summery'}>
                         <Button variant="contained" onClick={() => setShow(true)} size="lg">Next</Button>
                     </Link>
                 </Grid>
 
-                
-
             </Grid>
-            {/* <Summery value={dataArray}/> */}
-
         </ContexData.Provider>
-
-
         </>
     );
 }
