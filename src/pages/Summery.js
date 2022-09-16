@@ -28,7 +28,6 @@ const useStyles = makeStyles({
 function Summery() {
 
     const value = useContext(ContexData)
-    console.log(value , 'yash')
     const classes = useStyles()
 
     return (
