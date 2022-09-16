@@ -4,13 +4,15 @@ import { makeStyles } from '@mui/styles';
 import classNames from "classnames";
 import { createContext, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import useFormData from "../hooks/useFormData";
 import Summery from "./Summery";
 
 const useStyles = makeStyles({
     root: {
         height: 'auto',
         width: '60%',
-        border: '1px solid #000000',
+        boxShadow:'0px 5px 10px 0px rgba(0, 0, 0, 0.5)',
+        borderRadius: '10px',
         padding: '20px'
     },
     tpyo01: {
@@ -59,15 +61,16 @@ const useStyles = makeStyles({
 
     }
 })
-const ContexData = createContext()
+export const ContexData = createContext()
 
-function Form() {
+function Form({setShow}) {
     const classes = useStyles()
     const [diagnosed, setDiagnosed] = useState({
         name: "",
         status: ""
     })
     const handleRadio = (e) => {
+        e.preventDefault()
         const target = e.target
         const diagnosedName = target.name
         const diagnosedValue = target.value
@@ -139,7 +142,6 @@ function Form() {
         name: '',
         value: ''
     })
-
     const handleScale = (e) => {
         const target = e.target
         const name = target.name
@@ -162,13 +164,24 @@ function Form() {
         e.preventDefault()
     }
 
-    const dataArray = [diagnosed, physical, mental, experiance, facewhile, scale]
-    const val = "yash"
+    const dataArray = [diagnosed, physical, mental, experiance, scale]
+
+    const obj = [
+        { name: 'yash' , age: '23'},
+        { name: 'yash' , age: '23'}
+
+    ]
+
+
+    
+    const [ formavalue , setFormvalue] = useState(obj)
+
     return (
         <>
-        <ContexData.Provider value={val}>
+        <ContexData.Provider value={obj} >
             <Grid className={classes.root}>
 
+                {/* header01 */}
                 <Grid container direction={'column'} alignItems={'center'} justifyContent={'center'}>
                     <span className={classes.tpyo01}>Pain & Function Description</span>
                     <br />
@@ -194,7 +207,7 @@ function Form() {
                     </Grid>
                 </Grid>
 
-
+                {/* header02 */}
                 <Grid className={classes.textarea}>
                     <Grid>
                         <span className={classes.typo03}>
@@ -209,6 +222,7 @@ function Form() {
                     </Grid>
                 </Grid>
 
+                {/* mainform */}
                 <Grid>
                     <form onSubmit={submitFormdata}>
                         {/* diagnosed */}
@@ -326,19 +340,24 @@ function Form() {
                     </form>
                 </Grid>
 
+                {/* button  */}
                 <Grid>
                     <Link to={'/summery'}>
-                        <Button variant="contained" size="lg">Next</Button>
+                        <Button variant="contained" onClick={() => setShow(true)} size="lg">Next</Button>
                     </Link>
                 </Grid>
-            </Grid>
 
-            
+                
+
+            </Grid>
+            {/* <Summery value={dataArray}/> */}
+
         </ContexData.Provider>
+
+
         </>
     );
 }
 
 
 export default Form;
-export { ContexData };

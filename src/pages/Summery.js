@@ -1,3 +1,6 @@
+
+
+
 import { Grid, Typography } from '@mui/material'
 import React, { useContext } from 'react'
 import { makeStyles } from '@mui/styles';
@@ -8,7 +11,8 @@ const useStyles = makeStyles({
     root: {
         height: 'auto',
         width: '60%',
-        border: '1px solid #000000',
+        boxShadow:'0px 5px 10px 0px rgba(0, 0, 0, 0.5)',
+        borderRadius: '10px',
         padding: '20px'
     },
     typo03: {
