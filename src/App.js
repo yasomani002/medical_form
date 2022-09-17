@@ -15,8 +15,6 @@ const useStyles = makeStyles({
 function App() {
 
   const [ show , setShow ] = useState(false)
-  const value = useContext(ContexData)
-  console.log(value , 'yash')
   const classes = useStyles()
   return (
     <>
